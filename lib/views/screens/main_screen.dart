@@ -1,4 +1,5 @@
 import 'package:dars15/vievmodel/viewmodel.dart';
+import 'package:dars15/views/screens/product_details.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class MainScreen extends StatelessWidget {
     final viewmodel = Viewmodel();
 
     return Scaffold(
-      appBar: AppBar(title: Text('Products')),
+      appBar: AppBar(),
       body: FutureBuilder(
         future: viewmodel.getProducts(),
         builder: (ctx, snapshot) {
@@ -37,11 +38,22 @@ class MainScreen extends StatelessWidget {
                   itemCount: product.products.length,
                   itemBuilder: (context, index) {
                     final productItem = product.products[index];
-                    return ListTile(
-                      leading: Image.network(product.image),
-                      title: Text(productItem.nameRu),
-                      subtitle: Text('Price: ${productItem.price}'),
-                      trailing: Text(productItem.qty.toString()),
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (ctx) => ProductDetails(product: productItem),
+                          ),
+                        );
+                      },
+                      child: ListTile(
+                        leading: Image.network(product.image),
+                        title: Text(productItem.nameRu),
+                        subtitle: Text('Price: ${productItem.price}'),
+                        trailing: Text(productItem.qty.toString()),
+                      ),
                     );
                   },
                 ),

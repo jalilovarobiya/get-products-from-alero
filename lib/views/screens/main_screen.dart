@@ -3,12 +3,11 @@ import 'package:dars15/views/screens/product_details.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  final Viewmodel viewmodel;
+  const MainScreen({super.key, required this.viewmodel});
 
   @override
   Widget build(BuildContext context) {
-    final viewmodel = Viewmodel();
-
     return Scaffold(
       appBar: AppBar(),
       body: FutureBuilder(
@@ -49,7 +48,7 @@ class MainScreen extends StatelessWidget {
                         );
                       },
                       child: ListTile(
-                        leading: Image.network(product.image),
+                        // leading: Image.network(product.image),
                         title: Text(productItem.nameRu),
                         subtitle: Text('Price: ${productItem.price}'),
                         trailing: Text(productItem.qty.toString()),
